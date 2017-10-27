@@ -1,0 +1,57 @@
+{include file="common/header" /}
+<div class="layui-body">
+    <form class="layui-form layui-form-pane1" action="{:url('home/nav/addNav')}" method="post">
+        <div class="layui-form-item">
+            <label class="layui-form-label">分类名称：</label>
+            <div class="layui-input-block">
+                <input type="text" name="nav_name" style="width: 30%;" required placeholder="请输入分类名称" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item" pane>
+            <label class="layui-form-label">开启状态：</label>
+            <div class="layui-input-block">
+                <input type="radio" name="status" value="1" title="开启" checked>
+                <input type="radio" name="status" value="2" title="禁用">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="*">提交</button>
+                <a href="{:url('home/nav/index')}" class="layui-btn layui-btn-primary">返回</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+
+    layui.use('form', function(){
+        var form = layui.form;
+        form.on('radio', function(data){
+            console.log(data);
+        });
+
+        //监听提交
+        form.on('submit(*)', function(data){
+            console.log(data)
+            return false;
+        });
+
+    });
+
+</script>
+<script>
+    layui.use('jquery', function(){
+        var $ = layui.jquery;
+        var submit = function(){
+            return false;
+        };
+        $('#test').on('submit', function(){
+            return false
+        });
+        $('#test').on('submit', function(){
+            return true
+        });
+    });
+</script>
+{include file="common/footer" /}

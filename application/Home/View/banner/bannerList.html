@@ -1,0 +1,106 @@
+{include file="common/header" /}
+<div class="layui-body">
+    <!--条件查询框-->
+    <form class="layui-form layui-form-pane1"  enctype=”multipart/form-data” action="{:url('home/banner/bannerList')}" method="post">
+        <div class="layui-inline">
+            <label class="layui-form-label">分类导航</label>
+            <div class="layui-input-block">
+                <select name="nav_id" class="select">
+                    <option value="0">全部分类</option>
+                    {volist name="navInfo" id="vo"}
+                    <option value="{$vo.nav_id}">{$vo.nav_name}</option>
+                    {/volist}
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline" pane>
+            <label class="layui-form-label">开启状态：</label>
+            <div class="layui-input-block">
+                <input type="radio" name="status" value="1" title="开启" checked>
+                <input type="radio" name="status" value="2" title="禁用">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="*">查询</button>
+            </div>
+        </div>
+    </form>
+    <div>
+        <table class="layui-table">
+            <thead>
+            <tr>
+                <th>所属分类</th>
+                <th>图片</th>
+                <th>跳转地址</th>
+                <th>添加时间</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {volist name='$bannerList' id='banner'}
+            <tr>
+                <td>{$banner.nav_name}</td>
+                <td>{$banner.banner_img}</td>
+                <td>{$banner.Jump_url}</td>
+                <td>{$banner.add_time|date="Y-m-d H:i:s", ###}</td>
+                <td>{if condition="$banner.status neq '1' "}禁用
+                    {else/}正常
+                    {/if}</td>
+                <td>
+                    <a href="{:url('home/banner/editBanner',['id' => $banner['id']])}" class="layui-btn"><i class="layui-icon">&#xe642;</i></a>
+                    <a href="{:url('home/banner/delBanner',['id' => $banner['id']])}" class="layui-btn" onclick="{if(confirm('确认删除?')){return true;}return false;}" ><i class="layui-icon">&#xe640;</i></a>
+                </td>
+            </tr>
+            {/volist}
+            </tbody>
+        </table>
+    </div>
+    总页数低于页码总数：<div id="demo0"></div>
+</div>
+<script>
+
+    layui.use(['laypage', 'layer'], function(){
+        var laypage = layui.laypage
+            ,layer = layui.layer;
+
+        //总页数低于页码总数
+        laypage.render({
+            elem: 'demo0'
+            ,count:200//数据总数
+        });
+    });
+</script>
+<script>
+
+    layui.use('form', function(){
+        var form = layui.form;
+        form.on('radio', function(data){
+            console.log(data);
+        });
+
+        //监听提交
+        form.on('submit(*)', function(data){
+            console.log(data)
+            return false;
+        });
+
+    });
+
+</script>
+<script>
+    layui.use('jquery', function(){
+        var $ = layui.jquery;
+        var submit = function(){
+            return false;
+        };
+        $('#test').on('submit', function(){
+            return false
+        });
+        $('#test').on('submit', function(){
+            return true
+        });
+    });
+</script>
+{include file="common/footer" /}

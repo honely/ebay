@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>layout 后台大布局 - Layui</title>
     <link rel="stylesheet" href="/static/css/layui.css">
+    <script src="/static/javascript/layui.js"></script>
     <style>
         iframe{
             width: 100%;
@@ -68,12 +69,19 @@
                 <li class="layui-nav-item">
                     <a href="javascript:;">导航分类管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">导航分类列表</a></dd>
-                        <dd><a href="javascript:;">导航分类广告</a></dd>
-                        <dd><a href="javascript:;">分类广告位置</a></dd>
+                        <dd><a href="{:url('home/nav/index')}">导航分类列表</a></dd>
+                        <dd><a href="{:url('home/nav/addNav')}">添加导航分类</a></dd>
+                        <dd><a href="{:url('home/banner/bannerList')}">分类导航banner列表</a></dd>
+                        <dd><a href="{:url('home/banner/addBanner')}">新增分类导航banner</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item"><a href="">商城</a></li>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;">首页</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;">首页分类管理</a></dd>
+                        <dd><a href="javascript:;">添加作品</a></dd>
+                    </dl>
+                </li>
             </ul>
         </div>
     </div>

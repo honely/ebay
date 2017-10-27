@@ -1,0 +1,79 @@
+{include file="common/header" /}
+<div class="layui-body">
+    <form class="layui-form layui-form-pane1"  enctype=”multipart/form-data” action="{:url('home/banner/addBanner')}" method="post">
+        <div class="layui-form-item">
+            <label class="layui-form-label">banner图片：</label>
+            <div class="layui-upload">
+                <input type="text" name="banner_img" width="30%" class="layui-input"/>
+                <button type="button" class="layui-btn" id="test1">上传图片</button>
+                <div class="layui-upload-list">
+                    <img class="layui-upload-img" src="" id="demo1">
+                    <p id="demoText"></p>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">跳转地址：</label>
+            <div class="layui-input-block">
+                <input type="url" name="Jump_url" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">分类导航</label>
+            <div class="layui-input-block">
+                <select name="nav_id" class="select">
+                    <option value="0">全部分类</option>
+                    {volist name="navInfo" id="vo"}
+                    <option value="{$vo.nav_id}">{$vo.nav_name}</option>
+                    {/volist}
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item" pane>
+            <label class="layui-form-label">开启状态：</label>
+            <div class="layui-input-block">
+                <input type="radio" name="status" value="1" title="开启" checked>
+                <input type="radio" name="status" value="2" title="禁用">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="*">新增</button>
+                <button type="reset" class="layui-btn layui-btn-primary">返回</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+
+    layui.use('form', function(){
+        var form = layui.form;
+        form.on('radio', function(data){
+            console.log(data);
+        });
+
+        //监听提交
+        form.on('submit(*)', function(data){
+            console.log(data)
+            return false;
+        });
+
+    });
+
+</script>
+<script>
+    layui.use('jquery', function(){
+        var $ = layui.jquery;
+        var submit = function(){
+            return false;
+        };
+        $('#test').on('submit', function(){
+            return false
+        });
+        $('#test').on('submit', function(){
+            return true
+        });
+    });
+</script>
+{include file="common/footer" /}
